@@ -1,0 +1,78 @@
+generated: '2026-08-04'
+method: derived
+source: live probes of level.co / api.level.co plus level.co product and support pages
+standards:
+- id: graphql
+  conforms: true
+  evidence: >-
+    https://level.co/api/ answers a GraphQL introspection POST with a spec-shaped __schema response
+    (queryType Query, mutationType Mutation, 419 types).
+- id: rfc8615-well-known-uris
+  conforms: true
+  evidence: >-
+    api.level.co serves /.well-known/assetlinks.json and /.well-known/apple-app-site-association at the
+    registered well-known paths (HTTP 200, application/json).
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt is 404 on level.co, www.level.co and api.level.co.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    api.level.co returns a bare {"message": "..."} JSON envelope with content-type application/json, not
+    application/problem+json, and carries no type/title/status/detail members.
+- id: oauth2
+  conforms: false
+  evidence: No oauth-authorization-server or oauth-protected-resource discovery document on any host; no
+    published OAuth documentation.
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration is 404 on every host.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document at any of /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json,
+    /api-docs, /docs or /redoc on level.co or api.level.co; developer.level.co and docs.level.co do not
+    resolve.
+- id: asyncapi
+  conforms: false
+  evidence: No published event, streaming or webhook surface.
+- id: mcp
+  conforms: false
+  evidence: No hosted MCP server; /.well-known/mcp.json is 404 on every host.
+- id: a2a
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json are 404 on every host.
+device_interoperability:
+  note: >-
+    Level ships no developer API, so its real interoperability story is at the device protocol layer rather
+    than the HTTP layer. These are product-level standards claimed on Level's own pages and press releases,
+    recorded here because they are what an integrator actually builds against.
+  standards:
+  - id: matter
+    conforms: true
+    evidence: >-
+      Level Lock (Matter), Level Lock Pro and Level Bolt are marketed with Matter support; see
+      https://level.co/press/introducing-level-lock-matter-the-worlds-most-advanced-smart-lock/
+  - id: thread
+    conforms: true
+    evidence: Matter-over-Thread rollout announced for Level Lock and extended to Level Bolt (level.co/news).
+  - id: bluetooth-le
+    conforms: true
+    evidence: Level locks are controlled over Bluetooth LE from the Level Home app (level.co product pages).
+  - id: apple-home-key
+    conforms: true
+    evidence: https://level.co/level-lock-pro/ — "Apple home keys and door status detection".
+  - id: bhma-aaa
+    conforms: true
+    evidence: >-
+      level.co homepage claims a BHMA AAA rating and half-a-million-operation testing for the lock hardware.
+  - id: fcc-part-15
+    conforms: true
+    evidence: https://level.co/fcc/ publishes FCC statements for Level radios.
+compliance_program:
+  published: false
+  note: >-
+    Level publishes no trust center, no certification list (SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP) and
+    no security program page. Privacy is handled by the ASSA ABLOY Digital & Access Solutions privacy
+    center at https://www.privacy.assaabloydss.com/en, which is a privacy statement, not a compliance
+    attestation. No `Compliance` pointer is emitted.

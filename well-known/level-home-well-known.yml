@@ -1,0 +1,95 @@
+generated: '2026-08-04'
+method: searched
+source: live probes of /.well-known/* on every Level Home host
+hosts:
+- host: https://api.level.co
+  documents:
+  - path: /.well-known/assetlinks.json
+    status: 200
+    content_type: application/json
+    file: level-home-assetlinks.json
+    note: >-
+      Android Digital Asset Links. Declares four packages delegated to handle api.level.co URLs —
+      co.level.app and co.level.app.debug (the consumer Level Home app) plus com.ambientproptech.mdu and
+      com.ambientproptech.mdu.debug (the Ambient Property Technologies multi-dwelling-unit app), which
+      confirms the two products share one backend host.
+  - path: /.well-known/apple-app-site-association
+    status: 200
+    content_type: application/json
+    file: level-home-apple-app-site-association.json
+    note: >-
+      Apple App Site Association. Apple team 7X5L5394AB, eight bundle IDs across the co.level.* and
+      legacy com.calthings.* namespaces (Cal Things was Level Home's original company name). The
+      advertised universal-link paths are the only publicly documented URL surface of api.level.co —
+      /invite/*, /pass/*, /verify/*, /recover/* and /franklin/in-home/opt-in/*.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  - path: /.well-known/change-password
+    status: 404
+- host: https://level.co
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  - path: /.well-known/assetlinks.json
+    status: 404
+  - path: /.well-known/apple-app-site-association
+    status: 404
+    note: also explicitly Disallowed in https://level.co/robots.txt
+  - path: /.well-known/change-password
+    status: 404
+- host: https://www.level.co
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+summary:
+  documents_found: 2
+  security_txt: false
+  oauth_or_oidc_discovery: false
+  api_catalog: false
+  agent_card: false
+x-evidence:
+  fetched: '2026-08-04'
+  note: >-
+    level.co answers every miss with a 404 HTML page from Craft CMS; api.level.co answers every miss with a
+    404 application/json {"message":"Not Found"} from AWS API Gateway. Both were verified as genuine 404s,
+    not SPA catch-alls returning 200.

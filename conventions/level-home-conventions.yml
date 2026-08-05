@@ -1,0 +1,66 @@
+generated: '2026-08-04'
+method: probed
+source: >-
+  live probes of https://api.level.co and https://level.co/api/, plus the /.well-known documents in
+  well-known/level-home-well-known.yml
+scope: >-
+  Level publishes no API documentation, so none of this is a documented contract. It is the cross-cutting
+  behaviour observed on the publicly reachable hosts, recorded so the gaps are visible.
+authentication:
+  documented: false
+  observed:
+  - host: https://level.co/api/
+    style: none
+    note: The Craft CMS public GraphQL schema answers anonymously; anything beyond it needs a token Level
+      does not publish.
+  - host: https://api.level.co
+    style: unknown
+    note: Account-gated mobile backend. No WWW-Authenticate challenge, no OAuth discovery document, no
+      published key or token scheme.
+  detail: authentication/level-home-authentication.yml
+idempotency:
+  supported: false
+  documented: false
+  note: >-
+    No Idempotency-Key header, no documented replay semantics, and no specification in which to declare
+    one. No `Idempotency` pointer is emitted for this provider.
+pagination:
+  documented: false
+  observed: >-
+    The Craft CMS GraphQL schema exposes the standard Craft `limit`/`offset` element-query arguments, but
+    they are not reachable in the published public scope (which is limited to ping and global sets).
+versioning:
+  scheme: none-observed
+  note: >-
+    api.level.co exposes no version segment on the paths advertised in its Apple App Site Association
+    (/invite, /pass, /verify, /recover, /franklin/in-home/opt-in) and /v1 returns 404. There is no
+    documented versioning or deprecation policy.
+request_tracing:
+  header: x-request-id
+  format: uuid
+  observed_on: https://api.level.co
+  note: Present on every response including 404s. The only usable operational convention on the host.
+error_envelope:
+  media_type: application/json
+  shape: '{"message": "..."}'
+  rfc9457: false
+  detail: errors/level-home-problem-types.yml
+rate_limiting:
+  documented: false
+  headers_observed: []
+  note: No RateLimit, X-RateLimit-* or Retry-After headers were returned on any probed response.
+content_negotiation:
+  api_host: application/json on every response, including error responses
+  website: text/html from Craft CMS; the GraphQL endpoint at /api/ returns application/json
+transport:
+  tls: TLSv1.3 on both level.co and api.level.co
+  hsts: false on level.co, absent on api.level.co
+  detail: security/level-home-domain-security.yml
+cors:
+  observed: 'access-control-allow-origin: * on the ambientproptech.com marketing host only; not observed on
+    api.level.co'
+gaps:
+- No developer portal, no getting-started, no authentication reference.
+- No idempotency, no pagination contract, no rate-limit signalling.
+- No versioning or deprecation policy.
+- Error envelope is non-standard and undocumented.

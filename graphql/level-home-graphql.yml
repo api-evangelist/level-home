@@ -1,0 +1,40 @@
+generated: '2026-08-04'
+method: probed
+source: https://level.co/api/
+endpoint: https://level.co/api/
+spec_type: GraphQL
+schema_file: level-home.graphql
+introspection:
+  enabled: true
+  anonymous: true
+  http_status: 200
+  types: 419
+  query_type: Query
+  mutation_type: Mutation
+  subscription_type: null
+public_scope:
+  query_fields:
+  - ping
+  - globalSets
+  - globalSet
+  mutation_fields:
+  - ping
+  note: >-
+    The endpoint is a Craft CMS GraphQL API serving the level.co marketing site. Introspection returns the
+    full Craft type system (419 types), but the token-less public schema only exposes `ping` plus global-set
+    reads, and `GlobalSetInterface` resolves to a single implementation, `bundleDiscounts_GlobalSet`. In
+    other words the schema surface is large and the callable surface is tiny.
+platform:
+  cms: Craft CMS
+  evidence: 'x-powered-by: Craft CMS response header on level.co'
+caveats:
+- This is a website content endpoint, not a device, account or partner API.
+- Level does not document it as a developer product and publishes no schema of its own; the SDL in
+  graphql/level-home.graphql was rendered from the server's own anonymous introspection response.
+- Anything beyond the three public fields requires a Craft GraphQL token Level does not publish.
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://level.co/api/
+  http_status: 200
+  content_type: application/json
+  probe: POST {"query":"{__schema{queryType{name}}}"} returned {"data":{"__schema":{"queryType":{"name":"Query"}}}}

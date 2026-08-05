@@ -1,0 +1,50 @@
+generated: '2026-08-04'
+method: probed
+source: unauthenticated HTTP probes of https://api.level.co and https://level.co/api/
+format: custom-json-envelope
+scope: >-
+  Level publishes no error reference and no OpenAPI, so this catalog is not derived from a specification.
+  It records the error envelope actually observed on the two publicly reachable Level hosts during the
+  2026-08-04 enrichment probe. It is deliberately small — it contains only responses that were fetched.
+envelopes:
+- host: https://api.level.co
+  media_type: application/json
+  shape:
+    message: string
+  correlation_header: x-request-id
+  note: >-
+    AWS API Gateway style envelope. Every response carries an x-request-id UUID. There is no error code,
+    no type URI, no status member in the body, and no RFC 9457 problem+json representation.
+- host: https://level.co/api/
+  media_type: application/json
+  shape:
+    errors:
+    - message: string
+  note: Standard GraphQL error array from Craft CMS.
+problems:
+- status: 404
+  title: Not Found
+  body: '{"message":"Not Found"}'
+  observed_at: https://api.level.co/
+  note: Returned for every unrouted path on the mobile backend, including all /.well-known misses.
+- status: 400
+  title: Malformed path parameter
+  body: '{"message":"uuid: incorrect UUID length 4 in string \"test\""}'
+  observed_at: https://api.level.co/invite/test
+  note: >-
+    The /invite/{uuid} universal-link route validates its path parameter as a UUID before authentication
+    and leaks the parser message verbatim. Confirms /invite takes a UUID rather than an opaque token.
+- status: 400
+  title: No GraphQL query was supplied
+  body: '{"errors":[{"message":"No GraphQL query was supplied"}]}'
+  observed_at: https://level.co/api/
+  note: Returned for a GET or an empty POST to the Craft CMS GraphQL endpoint.
+gaps:
+- No documented error code registry.
+- No RFC 9457 application/problem+json representation.
+- No documented retry or rate-limit error semantics.
+- The 400 on /invite/{uuid} echoes an internal parser message, which is a minor information-disclosure
+  smell rather than a stable contract an integrator should depend on.
+x-evidence:
+  fetched: '2026-08-04'
+  method: unauthenticated GET/POST, no credentials of any kind used

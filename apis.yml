@@ -1,23 +1,132 @@
 aid: level-home
 name: Level Home
-description: 'Level Home is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Level Home is the Redwood City, California maker of the "invisible" Level smart lock family — Level Lock,
+  Level Lock Pro, Level Bolt and Level Keypad — which hide the motor, radios and battery inside a standard-looking
+  deadbolt. The locks speak Bluetooth LE, Thread and Matter, and work with Apple Home (including Apple Home Key),
+  Google Home, Amazon Alexa and SmartThings rather than through a published third-party developer API. In September
+  2024 ASSA ABLOY acquired the Level Lock hardware business, brand and IP, which continues to operate as Level at
+  level.co; the remaining Level Home, Inc. entity — the Level M multifamily software business, which also absorbed
+  Dwelo — renamed itself Ambient Property Technologies and now sells smart access, apartment automation and building
+  intelligence to multifamily owners with integrations into RealPage, Yardi, Entrata, ResMan and ButterflyMX. Level
+  publishes no developer portal, no OpenAPI and no partner API documentation; the only publicly reachable
+  machine-readable contracts are the Craft CMS GraphQL content endpoint behind level.co/api and the mobile
+  application backend at api.level.co, which is undocumented and account-gated. Third-party developer access to
+  Level devices is brokered by Seam, and local control is available through Matter/Thread.
+image: https://level.co/images/logos/_1200x630_crop_center-center_82_none/level.png?mtime=1696960281
 url: https://raw.githubusercontent.com/api-evangelist/level-home/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Company
-apis: []
+- smart-lock
+- smart-home
+- home-automation
+- iot
+- access-control
+- matter
+- thread
+- bluetooth-le
+- apple-home-key
+- consumer-hardware
+- multifamily
+- proptech
+- graphql
+apis:
+- name: Level Website Content GraphQL API
+  description: >-
+    Publicly reachable GraphQL endpoint served by the Craft CMS instance behind level.co. Introspection is
+    enabled anonymously, but the published public schema scope is deliberately narrow — a `ping` query and
+    mutation plus `globalSet`/`globalSets` access limited to the bundleDiscounts global set. This is the
+    website's content API, not a device or account API, and Level does not document it as a developer product.
+  humanURL: https://level.co/
+  baseURL: https://level.co/api/
+  tags:
+  - graphql
+  - content
+  - cms
+  properties:
+  - type: GraphQLEndpoint
+    url: https://level.co/api/
+- name: Level Mobile Application Backend
+  description: >-
+    The undocumented HTTPS backend the Level Home iOS and Android applications talk to. It is an AWS API Gateway
+    fronted service that returns a `{"message": "..."}` JSON error envelope and an `x-request-id` correlation
+    header on every response. A small set of paths is publicly advertised through the Apple App Site Association
+    and Android asset links files it serves from /.well-known — /invite/{uuid}, /pass/{id}, /verify/{token},
+    /recover/{token} and /franklin/in-home/opt-in/{id} — used for universal-link invitations, guest passes and
+    account recovery. There is no public specification, no developer signup and no documented authentication.
+  humanURL: https://level.co/support/
+  baseURL: https://api.level.co/
+  tags:
+  - mobile-backend
+  - access-control
+  - undocumented
+  properties:
+  - type: AppleAppSiteAssociation
+    url: well-known/level-home-apple-app-site-association.json
+  - type: AssetLinks
+    url: well-known/level-home-assetlinks.json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/level-home-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/level-home_stock/
+  url: https://level.co/
+- type: Documentation
+  url: https://level.co/support/
+- type: Support
+  url: https://level.co/support/
+- type: HelpCenter
+  url: https://level.co/support/
+- type: Blog
+  url: https://level.co/stories/
+- type: PressReleases
+  url: https://level.co/press/
+- type: GitHubOrganization
+  url: https://github.com/LevelHome
+- type: Pricing
+  url: https://level.co/all-products/
+- type: SignUp
+  url: https://level.co/account/
+- type: TermsOfService
+  url: https://level.co/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.privacy.assaabloydss.com/en
+- type: Legal
+  url: https://level.co/legal/
+- type: Warranty
+  url: https://level.co/return-policy/
+- type: Partnerships
+  url: https://level.co/partnerships/
+- type: ContactForm
+  url: https://level.co/contact-form/
+- type: FCC
+  url: https://level.co/fcc/
+- type: GraphQL
+  url: graphql/level-home.graphql
+- type: WellKnown
+  url: well-known/level-home-well-known.yml
+- type: Packages
+  url: packages/level-home-packages.yml
+- type: LLMsTxt
+  url: llms/level-home-llms.txt
+- type: Conformance
+  url: conformance/level-home-conformance.yml
+- type: ErrorCatalog
+  url: errors/level-home-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/level-home-lifecycle.yml
+- type: Conventions
+  url: conventions/level-home-conventions.yml
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1

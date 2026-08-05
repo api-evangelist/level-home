@@ -1,0 +1,44 @@
+generated: '2026-08-04'
+method: probed
+source: live probes of https://level.co/api/ and https://api.level.co
+documented: false
+note: >-
+  Level Home publishes no authentication documentation, no developer portal and no specification, so this
+  profile is observed rather than derived from securitySchemes. No `Authentication` pointer is wired into
+  apis.yml, because the scoring check that reads it asks whether the provider *documents* authentication,
+  and Level does not.
+summary:
+  types: []
+  api_key_in: []
+  oauth2_flows: []
+  discovery_documents: none
+schemes:
+- host: https://level.co/api/
+  name: craft-public-schema
+  type: none
+  observed: >-
+    Anonymous POST returns data for the public schema (ping, globalSets, globalSet). Craft CMS private
+    schemas are selected with an Authorization: Bearer <graphql-token> header, but Level publishes no
+    token and no token-issuing surface.
+- host: https://api.level.co
+  name: unknown
+  type: unknown
+  observed: >-
+    No WWW-Authenticate challenge on 401/404 paths; unrouted paths return 404 rather than 401, so the
+    authentication scheme is not externally observable. /.well-known/openid-configuration,
+    /.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource are all 404, so the
+    backend advertises neither OIDC nor RFC 8414/9728 discovery.
+public_unauthenticated_routes:
+- path: /invite/{uuid}
+  note: Validates the UUID before auth; 400 on a malformed value.
+- path: /pass/{id}
+  note: Returns text/html — a guest-pass landing page.
+- path: /verify/{token}
+- path: /recover/{token}
+- path: /franklin/in-home/opt-in/{id}
+source_of_routes: https://api.level.co/.well-known/apple-app-site-association
+gaps:
+- No published auth documentation for developers or partners.
+- No OAuth 2.0 / OIDC discovery.
+- No API key issuance surface.
+- Third-party access to Level devices is brokered by Seam rather than by a Level-issued credential.

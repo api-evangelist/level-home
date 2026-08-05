@@ -1,0 +1,48 @@
+generated: '2026-08-04'
+method: searched
+source: level.co, api.level.co, level.co/support/, level.co/press/, github.com/LevelHome
+versioning:
+  scheme: none-published
+  current: null
+  docs: null
+  note: >-
+    No API versioning is published. Product versioning is hardware-generation based (Level Bolt, Level Lock,
+    Level Lock Matter, Level Lock Pro, Level Keypad) and firmware/app updates are delivered through the
+    Level Home mobile app rather than a published release channel.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy, no RFC 8594 Sunset/Deprecation header support observed.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - url: https://status.level.co/
+    result: does not resolve
+  note: No status page was found for level.co or api.level.co. No `StatusPage` pointer is emitted.
+changelog:
+  url: null
+  note: >-
+    Level publishes no dated developer or product changelog. https://level.co/press/ carries dated press
+    releases and https://level.co/news/ aggregates third-party press coverage; neither is a changelog, so
+    no `ChangeLog` pointer is emitted.
+deprecated_operations: []
+corporate_lifecycle:
+- date: '2024-09-10'
+  event: >-
+    ASSA ABLOY acquires the Level Lock hardware business, brand, IP and teams; Level continues as an
+    independent brand and subsidiary at level.co.
+  source: https://level.co/press/assa-abloy-acquires-level-lock-in-the-us/
+- date: '2024-09'
+  event: >-
+    The remaining Level Home, Inc. entity — the Level M multifamily software business — renames itself
+    Ambient Property Technologies and continues independently at ambientproptech.com.
+  source: https://www.ambientproptech.com/resources/level-m-is-becoming-ambient
+- date: '2026-08-04'
+  event: >-
+    Observed: https://level.co/multifamily/ still 301-redirects to the retired levelm.co domain, which was
+    dropped and re-registered on 2026-06-11 and now chains to unrelated third-party content. See
+    security/level-home-domain-security.yml#x-findings.
+  source: https://level.co/multifamily/

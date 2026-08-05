@@ -1,0 +1,57 @@
+generated: '2026-08-04'
+method: searched
+source: npm, PyPI, GitHub org github.com/LevelHome, level.co documentation
+packages: []
+summary:
+  official_sdks: 0
+  note: >-
+    Level Home publishes no first-party client library on any public registry. There is no developer
+    portal, no API documentation and therefore no SDK to accompany one. The npm package `level-co` is
+    unrelated (a LevelDB helper by juliangruber) and no `level-home`/`levelco`/`levelhome` project exists
+    on PyPI.
+registries_probed:
+- registry: npm
+  queries: [level-home, levelco]
+  first_party_hits: 0
+- registry: pypi
+  queries: [level-home, levelco, levelhome]
+  first_party_hits: 0
+  http_status: 404
+github_organization:
+  url: https://github.com/LevelHome
+  name: Level Home Enterprise
+  public_repos: 11
+  first_party_libraries: 0
+  note: >-
+    Every public repository in the org is a fork of an upstream embedded/firmware or observability project
+    rather than a Level library — micro-ecc, IOS-Pods-DFU-Library, sdk-nrf, sdk-zephyr, IOS-CoreBluetooth-Mock,
+    aws-otel-collector, ot-efr32, gecko_sdk, simplicity_sdk, google-home-api-sample-app-android and
+    home-assistant-core. The fork set is itself a useful signal: Nordic nRF + Zephyr + Silicon Labs EFR32 +
+    OpenThread is a Thread/Matter lock firmware stack, and the CoreBluetooth mock points at the BLE app path.
+mobile_applications:
+- platform: ios
+  name: Level Home
+  bundle_ids: [co.level.app, co.level.knock, co.level.bolt-prod, co.level.bolt-dev]
+  legacy_bundle_ids: [com.calthings.app, com.calthings.knock, com.calthings.bolt-prod, com.calthings.bolt-dev]
+  apple_team_id: 7X5L5394AB
+  url: https://apps.apple.com/us/app/level-home/id1490027518
+  source: https://api.level.co/.well-known/apple-app-site-association
+- platform: android
+  name: Level Home
+  package: co.level.app
+  url: https://play.google.com/store/apps/details?id=co.level.app
+  source: https://api.level.co/.well-known/assetlinks.json
+- platform: android
+  name: Ambient (multi-dwelling unit)
+  package: com.ambientproptech.mdu
+  source: https://api.level.co/.well-known/assetlinks.json
+  note: Ambient Property Technologies app delegated to the same api.level.co host
+third_party_access:
+- name: Seam
+  url: https://www.seam.co/manufacturers/level
+  official: false
+  status: inquire-only
+  note: >-
+    Seam brokers developer access to Level locks, but its own manufacturer page states "This system is not
+    yet available in Seam's API. Please Inquire." It is the closest thing to a developer path for Level
+    devices and it is not first-party.

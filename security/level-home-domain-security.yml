@@ -1,0 +1,48 @@
+generated: '2026-08-04'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: level.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 11 23:59:59 2027 GMT
+  hsts: false
+- host: api.level.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 28 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: level.co
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+x-findings:
+- id: dangling-redirect-levelm-co
+  severity: high
+  summary: >-
+    https://level.co/multifamily/ still issues a 301 to https://levelm.co/ — the domain of the former
+    Level M multifamily business. levelm.co lapsed and was re-registered on 2026-06-11 through NameCheap
+    (Cloudflare nameservers) and now 301-chains to unrelated third-party sites currently serving
+    Indonesian online-gambling SEO content. A Level-branded path on the company's own production domain
+    therefore hands visitors and crawlers to content Level does not control.
+  observed: '2026-08-04'
+  evidence:
+  - url: https://level.co/multifamily/
+    http_status: 301
+    location: https://levelm.co/
+    server: Apache/2.4.61 (Craft CMS)
+  - url: https://levelm.co/
+    http_status: 301
+    location: https://patrickmolloyfishing.com/
+    server: cloudflare
+  - source: whois levelm.co
+    creation_date: '2026-06-11'
+    registrar: NameCheap, Inc.
+    note: re-registration date is after the September 2024 ASSA ABLOY transaction, i.e. a dropped-and-recaptured domain
+  remediation: >-
+    Remove or repoint the /multifamily/ redirect (Ambient Property Technologies now serves that audience at
+    https://www.ambientproptech.com/), and audit the Craft CMS redirect table for other rules pointing at
+    domains the company no longer owns.
