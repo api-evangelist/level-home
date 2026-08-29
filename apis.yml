@@ -13,6 +13,17 @@ description: >-
   machine-readable contracts are the Craft CMS GraphQL content endpoint behind level.co/api and the mobile
   application backend at api.level.co, which is undocumented and account-gated. Third-party developer access to
   Level devices is brokered by Seam, and local control is available through Matter/Thread.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://level.co/images/logos/_1200x630_crop_center-center_82_none/level.png?mtime=1696960281
 url: https://raw.githubusercontent.com/api-evangelist/level-home/refs/heads/main/apis.yml
 x-type: company
