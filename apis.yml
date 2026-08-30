@@ -32,19 +32,19 @@ specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Smart Lock
-- Smart Home
-- Home Automation
-- IoT
-- Access Control
-- Matter
-- Thread
-- Bluetooth LE
+- smart-lock
+- smart-home
+- home-automation
+- iot
+- access-control
+- matter
+- thread
+- bluetooth-le
 - apple-home-key
-- Consumer Hardware
-- Multifamily
-- PropTech
-- GraphQL
+- consumer-hardware
+- multifamily
+- proptech
+- graphql
 tags_raw:
 - smart-lock
 - smart-home
@@ -69,9 +69,9 @@ apis:
   humanURL: https://level.co/
   baseURL: https://level.co/api/
   tags:
-  - GraphQL
-  - Content
-  - CMS
+  - graphql
+  - content
+  - cms
   tags_raw:
   - graphql
   - content
@@ -90,9 +90,9 @@ apis:
   humanURL: https://level.co/support/
   baseURL: https://api.level.co/
   tags:
-  - Mobile Backend
-  - Access Control
-  - Undocumented
+  - mobile-backend
+  - access-control
+  - undocumented
   tags_raw:
   - mobile-backend
   - access-control
