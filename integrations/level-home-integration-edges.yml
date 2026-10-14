@@ -1,0 +1,43 @@
+edges:
+- partner_name: Connectivity Standards Alliance (Matter)
+  partner: null
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://on.dcl.csa-iot.org/dcl/vendorinfo/vendors/4767
+  category: Matter certified products
+  contract_reference:
+    register: CSA Distributed Compliance Ledger (Matter certification)
+    spec_file: null
+    standard: Matter
+    role: Matter certified vendor
+    vendor_id: 4767
+    registered_name: Level Home, Part of ASSA ABLOY
+    legal_name: Assa Abloy Level LLC
+    landing_page: https://level.co
+    identity_source: vendorLandingPageURL
+    matched_domain: level.co
+    matched_by: domain
+    certified_models: 4
+    certified_products:
+    - product: Door Lock
+      device_type_id: 10
+      models: 4
+      revoked_models: 0
+      latest_certification: '2026-02-04'
+      transports:
+      - bluetooth
+      - thread
+      examples:
+      - Level Bolt (Matter)
+      - Level Lock (Matter)
+      - Level Lock Pro
+      lapsed: false
+    signal_note: certified_products = one entry per device type (diversity), not per model
+    detected_by: sweep-iot.py
+    detected: '2026-10-14'
+generated: '2026-10-14'
+method: searched
+checked:
+- https://on.dcl.csa-iot.org/dcl/vendorinfo/vendors
