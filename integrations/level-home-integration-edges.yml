@@ -25,7 +25,7 @@ edges:
       device_type_id: 10
       models: 4
       revoked_models: 0
-      latest_certification: '2026-02-04'
+      latest_certification: '2026-06-24'
       transports:
       - bluetooth
       - thread
@@ -36,8 +36,51 @@ edges:
       lapsed: false
     signal_note: certified_products = one entry per device type (diversity), not per model
     detected_by: sweep-iot.py
-    detected: '2026-10-14'
+    detected: '2026-10-19'
+- partner_name: Thread Group certified products
+  partner: null
+  partner_match: register-name
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.threadgroup.org/What-is-Thread/Certified-Products
+  category: Thread network certification
+  contract_reference:
+    register: Thread Group certified products (threadgroup.org/What-is-Thread/Certified-Products)
+    standard: Thread
+    spec_file: null
+    role: thread-certified-product
+    registered_name: Level Home Inc.
+    register_id: https://www.threadgroup.org/What-is-Thread/Certified-Products
+    matched_domain: null
+    matched_by: register-name
+    register_name_note: register-name 'levelhome' = level-home; no wikidata P856
+    certified_products:
+    - product: Safety
+      lapsed: false
+      certification_routes:
+      - Built On Thread
+    products_sample:
+    - Level Lock+ (Matter)
+    signal_note: certified_products = one entry per Thread device type with a certified product, never per product;
+      the route (Thread Cert Component / Built On Thread / Border Router) is context. The page lists current certifications
+      and marks none withdrawn, so lapsed is false
+    detected_by: sweep-wireless-connectivity-certification.py
+    detected: '2026-10-22'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-wireless-connectivity-certification.py
+  first_seen: '2026-10-22'
 generated: '2026-10-14'
 method: searched
 checked:
 - https://on.dcl.csa-iot.org/dcl/vendorinfo/vendors
+- https://www.threadgroup.org/What-is-Thread/Certified-Products
+- https://www.usb.org/products
+- https://www.wi-fi.org/product-finder
+source:
+- https://www.threadgroup.org/What-is-Thread/Certified-Products
+- https://www.usb.org/products
+- https://www.wi-fi.org/product-finder
